@@ -1,7 +1,3 @@
-# C-Code-Style-
-Kiểu mã C được áp dụng và các quy tắc 
-
-
 - C99 standard
 - Sử dụng space thay cho tab 1tab = 4space
 - Sử dụng một khoảng trắng trước và sau các toán tử so sánh và gán
@@ -79,10 +75,87 @@ typedef enum {
 ## Macro
 - Luôn sử dụng macro thay thế cho các hằng số
 - Tất cả các macro đều phải được viết hoa và phân cách bằng `_`
+```c
+/* OK */
+#define MIN(x, y)           ((x) < (y) ? (x) : (y))
+```
+
 - Khi macro sử dụng nhiều dòng lệnh thực hiện bảo vệ bằng `do-while(0)`
+```c
+#define SET_POINT(p, x, y) do {\
+    (p)->px = (x);             \
+    (p)->py = (y);             \
+}while(0)
+```
 
 ## Header File
 - Header file phải bao gồm `#ifdef`
 - Phải bao gồm check `c++`
 - Tệp chỉ bao gồm các kiểu dữ liệu, biến và hàm global của module
 - Không đưa file `.c` vào một file `.c` khác
+```c
+#ifndef TEMPLATE_HDR_H
+#define TEMPLATE_HDR_H
+
+/* Include headers */
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+/* File content here */
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* TEMPLATE_HDR_H */
+```
+
+## Compound statement
+- Luôn sử dụng `{}` khi dùng với `if` bất kể là có 1 câu lệnh hay nhiều câu lệnh
+- Trường hợp sử dụng nhiều `if` và `else if`
+```c
+/* OK */
+if(a)
+{
+    /* some thing */
+}
+else if (b)
+{
+    /* do some thing */
+}
+```
+- Trường hợp sử dụng `do-while`
+```c
+/* Ok */
+do
+{
+    /* do some thing */
+}while(check());
+```
+
+- Trường hợp sử dụng `while`
+```c
+/* OK */
+while(check()) {}
+while(a)
+{
+    /* do some thing */
+}
+```
+
+## Switch statement
+- Luôn tồn tại `default`
+- Luôn thụt vào đối với `case` và `break`
+```C
+switch(check())
+{
+    case 0:
+        break;
+    case 1:
+        break;
+    default:
+        break;
+}
+```
